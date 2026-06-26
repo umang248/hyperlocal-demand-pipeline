@@ -3,7 +3,7 @@
 env/
 venv/
 
-# Environment variables (credentials - DO NOT COMMIT!)
+# Environment variables 
 .env
 
 # Python caching
@@ -13,15 +13,13 @@ __pycache__/
 *.pyd
 .pytest_cache/
 
-# Apache Airflow local directory (database, logs, configs)
+# Apache Airflow local directory 
 airflow/
 
 # Temporary data files
 data/temp/
 data/temp_*.csv
 
-# Model binary artifacts (large files, keep latest.txt pointer only)
-models/*.pkl
 
 # OS files
 .DS_Store

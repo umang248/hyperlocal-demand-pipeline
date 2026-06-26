@@ -2,7 +2,7 @@
 
 A portfolio data engineering and machine learning project simulating a real-world ops forecasting problem solved by dark store quick-commerce companies like Blinkit, Zepto, and Swiggy Instamart.
 
-## 📌 Problem Statement
+##  Problem Statement
 Dark stores (micro-warehouses) need hourly order forecasting per delivery zone to:
 - Pre-pack high-velocity SKUs (instant dispatch).
 - Strategically allocate delivery partners to zones ahead of peak demand.
@@ -10,7 +10,7 @@ Dark stores (micro-warehouses) need hourly order forecasting per delivery zone t
 
 This project builds the end-to-end data pipeline that automates, orchestrates, trains, and monitors this forecasting process.
 
-## 🏗️ Pipeline Architecture
+##  Pipeline Architecture
 ```
                          [Data Simulation Script] (scripts/simulate_data.py)
                                      ↓
@@ -27,7 +27,7 @@ This project builds the end-to-end data pipeline that automates, orchestrates, t
 [Streamlit Dashboard] ───────(Ops Heatmap, Model Monitor, DAG Health) <────── PostgreSQL
 ```
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Orchestration:** Apache Airflow 2.10 (Local Sequenced Execution)
 - **Database:** PostgreSQL 18
 - **Modeling & ML:** LightGBM, Scikit-learn, Joblib
@@ -35,13 +35,13 @@ This project builds the end-to-end data pipeline that automates, orchestrates, t
 - **Dashboard:** Streamlit, Plotly
 - **Unit Testing:** Pytest
 
-## 📈 Key Results
+##  Key Results
 - **Forecast MAPE:** ~8-12% (outperforms naive last-week baseline by ~15-20% absolute percentage error).
 - **Scalability:** Pipeline processes ~200,000+ orders across 5 zones for 6 months in seconds.
 - **Drift Protection:** Model automatically retrains if prediction MAPE on the last 24 hours exceeds 15%.
 - **Promotion Safety:** Retrained model only replaces the active model if it beats the baseline.
 
-## 🚀 How to Run
+##  How to Run
 
 ### 1. Setup Virtual Environment & Install Dependencies
 Ensure you have Python 3.13 and PostgreSQL running.
@@ -68,9 +68,6 @@ AIRFLOW_HOME=./airflow
 ### 3. Initialize Database & Run Simulator
 Initialize the database tables and populate 6 months of synthetic order transactions:
 ```bash
-# Run database creation & environment setup
-python scripts/create_db.py
-
 # Initialize schemas
 python scripts/db_utils.py
 
@@ -112,7 +109,7 @@ Execute the test suites:
 pytest tests/
 ```
 
-## 🧠 What I Learned
+##  What I Learned
 - **DAG Isolation:** Keeping Ingestion, Engineering, Training, and Prediction separated prevents one bottleneck from corrupting downstream states.
 - **Time-Series Alignment:** Reindexing aggregated order counts to a complete hourly grid is essential. Without it, lag features shift incorrectly during periods of 0 orders.
 - **Data Leakage Mitigation:** Aggregations and rolling features must be computed **per zone** and shifted properly. Using `shift(1)` on rolling averages ensures features only look at past intervals.
